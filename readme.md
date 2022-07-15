@@ -2,8 +2,8 @@
 
 ## Capturas
 ## Index
-![Alt text](./polls/static/polls/images/index.png "index")
+![Index](./premiosplatziapp/polls/static/polls/images/index.png "index")
 ## Detail
-![Alt text](./polls/static/polls/images/detail.png "detail")
+![Detail](./premiosplatziapp/polls/static/polls/images/detail.png "detail")
 ## Results
-![Alt text](./polls/static/polls/images/results.png "results")
+![Results](./premiosplatziapp/polls/static/polls/images/results.png "results")
