@@ -1,27 +1,48 @@
-<form action="{% url 'polls:vote' question.id %}" method="post">
-{% csrf_token %}
-    <fieldset>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Poll</title>
+    <link rel="stylesheet" href="{% static 'polls/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'polls/style.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <form class="vote-form" action="{% url 'polls:vote' question.id %}" method="post">
+        {% csrf_token %}
+        <fieldset>
+    
+            <legend><h1>{{ question.question_text }}</h1></legend>
+    
+            {% if error_message %}
+                <p><strong>{{ error_message }}</strong></p>
+            {% endif %}
+    
+            {% for choice in question.choice_set.all %}
+            <div class="option">
+                <input 
+                    type="radio"
+                    name="choice"
+                    id="choide{{ forloop.counter }}"
+                    value="{{choice.id}}"
+                >
+                    <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label>
+            </div>
+            {% endfor %}
+    
+        </fieldset>
+        <input type="submit" value="votar">
+    </form>
+    <a class="return" href="{% url 'polls:index' %}">To Polls</a>
+</body>
+</html>
 
-        <legend><h1>{{ question.question_text }}</h1></legend>
 
-        {% if error_message %}
-            <p><strong>{{ error_message }}</strong></p>
-        {% endif %}
-
-        {% for choice in question.choice_set.all %}
-            <input 
-                type="radio"
-                name="choice"
-                id="choide{{ forloop.counter }}"
-                value="{{choice.id}}"
-            />
-            <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label>
-            <br>
-        {% endfor %}
-
-    </fieldset>
-    <input type="submit" value="votar">
-</form>
 
 {% comment %} <h1>{{question.question_text}}</h1>
 <ul>
